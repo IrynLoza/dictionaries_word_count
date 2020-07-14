@@ -7,6 +7,7 @@ file = open(sys.argv[1])   # first real argument
 #file = open('test.txt')
 
 def get_words(file):
+    """Get words from file"""
 
     all_words = []
     for line in file:
@@ -19,11 +20,19 @@ def get_words(file):
 
 get_words(file)
 
-word_count = {}
-for item in all_lines:
-    item = item.rstrip('.,:?";!()"''')
-    item = item.lower()
-    word_count[item] = word_count.get(item, 0) + 1    
+def count_words_in_dict(all_words):
+    """Create dictionary with count of how many times
+    every word appears"""
+
+    word_count = {}
+    for item in all_words:
+        item = item.rstrip('.,:?";!()"''')
+        item = item.lower()
+        word_count[item] = word_count.get(item, 0) + 1    
+
+    return word_count    
+
+count_words_in_dict(all_words)    
 
 def sort_dict(dictionary):
     """Sort dictionary"""
