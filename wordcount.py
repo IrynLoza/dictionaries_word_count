@@ -18,7 +18,7 @@ def get_words(file):
 
     return all_words 
 
-get_words(file)
+#get_words(file)
 
 def count_words_in_dict(all_words):
     """Create dictionary with count of how many times
@@ -26,35 +26,31 @@ def count_words_in_dict(all_words):
 
     word_count = {}
     for item in all_words:
-        item = item.rstrip('.,:?";!()"''')
+        item = item.rstrip('.,:?";!()"_''')
         item = item.lower()
-        word_count[item] = word_count.get(item, 0) + 1    
+        word_count[item] = word_count.get(item, 0) + 1  
 
-    return word_count    
-
-count_words_in_dict(all_words)    
+    return word_count 
 
 def sort_dict(dictionary):
     """Sort dictionary"""
 
     sorted_dict = sorted((value, key) for (key,value) in dictionary.items())  
     sorted_dict.reverse()
+    new_dict = {}
     for index,value in sorted_dict:
-        print(value, index)
+        new_dict[value] = index
 
-sort_dict(word_count)
+    print(new_dict)    
+    return new_dict         
 
-"""all_lines = []
-for line in file:
-    line = line.rstrip()
-    full_line = line.split(' ')
-    for word in full_line:
-        all_lines.append(word)
+def print_words():
+    """Print sorted words with count"""
 
-word_count = {}
-for item in all_lines:
-    item = item.rstrip('.,:?";!()"''')
-    item = item.lower()
-    word_count[item] = word_count.get(item, 0) + 1 
+    words = get_words(file)
+    word_count = count_words_in_dict(words)
+    result = sort_dict(word_count)
+    for (key, value) in result.items():
+        print(f'{key}: {value}')
 
-print(word_count)"""    
+print_words()
